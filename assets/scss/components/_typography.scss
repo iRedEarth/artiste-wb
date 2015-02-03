@@ -1,0 +1,306 @@
+
+/*
+----------------------------------------------------------------------
+Site Name: artist-wb
+Author: Adam CW Houston
+
+	TYPOGRAPHY
+	 - Text Sizes
+	 - Text Fonts 
+	 - Text Defaults
+
+----------------------------------------------------------------------
+*/
+
+// FONT SIZES
+$font-size-mobile:  16px;
+$font-size-tablet:  15px;
+$font-size-desktop: 17px;
+
+
+
+// FONT FAMILIES
+$newscycle:	'News Cycle', sans-serif;
+$bitter:	'Bitter', serif;
+$oswald:	'Oswald', sans-serif;
+//$abril:	'Abril Fatface', cursive;
+//$raleway:	'Raleway', sans-serif;
+//$limelight:'Limelight', cursive;
+//$fanwood:	'Fanwood Text', serif;
+
+$sans-serif:	'News Cycle', Helvetica, Arial, sans-serif;
+$serif:			"Georgia", Cambria, Times New Roman, Times, serif;
+$font-body:		$bitter;
+$font-header:	$oswald;
+$font-small:    $newscycle;
+$lato:          $newscycle;
+
+
+
+$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif:       Georgia, "Times New Roman", Times, serif;
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-base:        $font-family-sans-serif;
+
+$font-size-base:          16px; //14px
+$font-size-large:         1.25em; //ceil((@font-size-base * 1.25)); // ~18px
+$font-size-small:         0.85em; //ceil((@font-size-base * 0.85)); // ~12px
+
+$font-size-h1:            2.6em; //floor((@font-size-base * 2.6)); // ~36px
+$font-size-h2:            2.15em; //floor((@font-size-base * 2.15)); // ~30px
+$font-size-h3:            1.7em; //ceil((@font-size-base * 1.7)); // ~24px
+$font-size-h4:            1.25em; //ceil((@font-size-base * 1.25)); // ~18px
+$font-size-h5:            1em; //@font-size-base;
+$font-size-h6:            0.85em; //ceil((@font-size-base * 0.85)); // ~12px
+
+$line-height-base:        1.428571429; // 20/14
+$line-height-computed:    floor(($font-size-base * $line-height-base)); // ~20px
+
+$headings-font-family:    inherit;
+$headings-font-weight:    800;
+$headings-line-height:    1.1;
+$headings-color:          inherit;
+
+$labels-font-family:    inherit;
+$labels-font-weight:    500;
+$labels-line-height:    1.1;
+$labels-color:          inherit;
+
+$nav-font-family:    $oswald;
+$nav-font-weight:    500;
+$nav-line-height:    $line-height-computed;
+$nav-color:          inherit;
+
+
+
+//  TYPOGRAPHIC DEFAULTS
+//----------------------------------------------------------------------
+html {
+	font-size: $font-size-mobile;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+	color: $text-color;
+	font-family: $font-body;
+	font-size: $font-size-base;
+	font-weight: 500;
+	line-height: $line-height-computed;
+  	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $font-header;
+	color: $header-text-color;
+	clear: both;
+	font-weight: 700;
+	text-shadow:1px 1px 1px rgba(0,0,0,0.25);
+
+	& a, & a:visited { color: $header-text-color; }
+	& a:hover, a:visited:hover { color: darken($header-text-color, 9%); }
+}
+
+p {
+	margin-bottom: 1.6em;
+	-ms-word-wrap: break-word;
+  	word-break: break-word; //non-standart css for webkit
+  	word-wrap: break-word;
+  	// cleaning up the ragged lines and breaks
+	-webkit-hyphens: auto;
+	   -moz-hyphens: auto;
+	        hyphens: auto;
+	// sets a minimum number of characters before and after the break
+	-webkit-hyphenate-before: 2;
+	 -webkit-hyphenate-after: 3;
+	         hyphenate-lines: 3;
+	// enabling fancy ligatures when available
+	-webkit-font-feature-settings: "liga", "dlig";
+	 -moz-font-feature-settings: "liga=1, dlig=1";
+	    -ms-font-feature-settings: "liga", "dlig";
+	     -o-font-feature-settings: "liga", "dlig";
+	        font-feature-settings: "liga", "dlig";
+}
+
+
+b,
+strong {
+	font-weight: 700;
+}
+
+dfn,
+cite,
+em,
+i {
+	font-style: italic;
+}
+
+blockquote {
+	border-left: 4px solid $text-color;
+	border-left: 4px solid fade_out($text-color, 0.7);
+	color: $text-color;
+	color: fade_out($text-color, 0.7);
+	font-size: 18px;
+	font-size: 1.8rem;
+	font-style: italic;
+	line-height: 1.6667;
+	margin-bottom: 1.6667em;
+	padding-left: 0.7778em;
+}
+
+blockquote p {
+	margin-bottom: 1.6667em;
+}
+
+blockquote > p:last-child {
+	margin-bottom: 0;
+}
+
+blockquote cite,
+blockquote small {
+	color: $text-color;
+	font-size: 15px;
+	font-size: 1.5rem;
+	font-family: $font-body, $sans-serif;
+	line-height: 1.6;
+}
+
+blockquote em,
+blockquote i,
+blockquote cite {
+	font-style: normal;
+}
+
+blockquote strong,
+blockquote b {
+	font-weight: 400;
+}
+
+address {
+	font-style: italic;
+	margin: 0 0 1.6em;
+}
+
+code,
+kbd,
+tt,
+var,
+samp,
+pre {
+	font-family: Inconsolata, monospace;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre {
+	background-color: transparent;
+	background-color: rgba(0, 0, 0, 0.2);
+	box-shadow:
+		inset 0px 0px 3px 1px rgba(0, 0, 0, 0.5),
+		1px 1px 1px 0px rgba(122, 117, 113, 0.50);
+
+	
+	//background-color: rgba(0, 0, 0, 0.01);
+	//border: 1px solid #eaeaea;
+	//border: 1px solid rgba(51, 51, 51, 0.1);
+	line-height: 1.2;
+	margin-bottom: 1.6em;
+	max-width: 100%;
+	overflow: auto;
+	padding: 0.8em;
+	white-space: pre;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+abbr[title] {
+	border-bottom: 1px dotted #eaeaea;
+	border-bottom: 1px dotted rgba(51, 51, 51, 0.1);
+	cursor: help;
+}
+
+mark,
+ins {
+	background-color: #fff9c0;
+	text-decoration: none;
+}
+
+sup,
+sub {
+	font-size: 75%;
+	height: 0;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	bottom: 1ex;
+}
+
+sub {
+	top: .5ex;
+}
+
+small {
+	font-size: 75%;
+}
+
+big {
+	font-size: 125%;
+}
+
+/******************************************************************
+H1, H2, H3, H4, H5 STYLES
+******************************************************************/
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+	text-rendering: optimizelegibility;
+	font-weight: 700;
+	/*
+	if you're going to use webfonts, be sure to check your weights
+	http://css-tricks.com/watch-your-font-weight/
+	*/
+
+	/* removing text decoration from all headline links */
+	a {
+		text-decoration: none;
+	}
+}
+
+h1, .h1 {
+	font-size: $font-size-h1;
+	line-height: 1.333em;
+}
+
+h2, .h2 {
+	font-size: $font-size-h2;
+	line-height: 1.4em;
+	margin-bottom: 0.375em;
+}
+
+h3, .h3 {
+	font-size: $font-size-h3;
+}
+
+h4, .h4 {
+	font-size: $font-size-h4;
+	font-weight: 700;
+}
+
+h5, .h5 {
+	font-size: $font-size-h5;
+	line-height: 2.09em;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}

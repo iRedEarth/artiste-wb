@@ -1,0 +1,87 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Variables
+
+Here is where we declare all our variables like colors, fonts,
+base values, and defaults. We want to make sure this file ONLY
+contains variables that way our files don't get all messy.
+No one likes a mess.
+
+******************************************************************/
+
+
+// BREAKPOINTS
+$mobile:"(max-width: 768px)";
+$mobile-lg:"(min-width: 768px) and (max-width: 1023px)";
+$tablet-sm: "(min-width: 768px) and (max-width: 1023px)";
+$tablet: "(min-width: 768px) and (max-width: 1023px)";
+$desktop: "(min-width: 1024px)";
+$desktop-lg: "(min-width: 1024px)";
+$desktop-xl: "(min-width: 1024px)";
+
+
+/*********************
+COLORS
+*********************/
+
+$body-color:		#393534; /* rgb(57,53,52) */
+
+$alert-yellow:      #ebe16f;
+$alert-red:         #fbe3e4;
+$alert-green:       #e6efc2;
+$alert-blue:        #d5edf8;
+
+$black:             #323944;
+$white:             #fff;
+
+// COLORS
+$color-pale:		#F4F4E8;  // L 93  off white/pale gold
+$color-yellow:		#FFC500;
+$color-platinum:	#F6F5F1;  // L 95  off white/warm grey
+$color-mercury:		#eee;     // L 93 
+$color-silver:		#D5D4D4;  // L 83
+$color-tin:			#888;     // L 53
+$color-nickle:		#787878;  // L 47
+$color-stainless:	#6A6B6B;  // L 42 #6B6B66 warmer
+$color-steel:		#616161;  // L 38
+$color-cobolt:		#595957;  // L 35
+$color-oldtin:		#555;     // L 33  #545454 ?
+$color-iron:		#4D4D4B;  // L 30
+$color-graphite:	#444;     // L 27
+
+$light-gray:        #f8f9fa;
+$gray:              #eaedf2;
+$text-color:        #D4CDB8; // rgb(212,205,184)
+$header-text-color:	#94825D;
+$text-blue:			rgb(199, 234, 237);
+$text-sky:			rgb(200, 243, 247);
+$text-pale:			rgb(187, 200, 197);
+$meta-gray:         #9fa6b4;
+
+$tan:               #eceee5;
+
+$green:             #7dd667;
+
+$bones-pink:        #f01d4f;
+$blue:              #2980b9;
+
+$link-color:        rgb(187, 200, 197); //#94825D; //#94825D;
+$link-hover:        $text-blue;
+
+$border-color:      #ccc;
+$disabled-gray:     #cfcfcf;
+
+$brand-primary:         #428bca;
+$brand-success:         #5cb85c;
+$brand-info:            #5bc0de;
+$brand-warning:         #f0ad4e;
+$brand-danger:          #d9534f;
+
+
+/*
+Here's a great tutorial on how to
+use color variables properly:
+http://sachagreif.com/sass-color-variables/
+*/

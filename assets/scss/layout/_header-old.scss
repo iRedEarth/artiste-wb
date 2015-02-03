@@ -1,0 +1,122 @@
+
+/*
+----------------------------------------------------------------------
+Site Name: artist-wb
+Author: Adam CW Houston
+
+	Header
+	 - Header Variables
+	 - Site Header
+	 - Site Branding
+
+----------------------------------------------------------------------
+*/
+
+// HEADER VARIABLES
+
+//$mobile-width: 360px;
+$mobile-width:415px;
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+$header-height: 100px;
+$logo-height: ($header-height*1.04);
+$logo-width: ($logo-height*4);
+
+@mixin mobile {
+  @media (max-width: #{$mobile-width}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+
+
+//  SITE HEADER
+//----------------------------------------------------------------------
+.header {
+	@include mobile { height: ($header-height*.65); }
+	@include tablet { height: ($header-height*.85); }
+	@include desktop { height: $header-height; }
+	margin-top: -2px;
+	border: 2px solid rgba(90, 91, 78, 0.22);
+	background-image: url('../../assets/img/wb-wood-pattern-512.jpg');
+	background-size: 512px 512px;
+	background-position: center top;
+	background-attachment: local;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.40);
+	overflow: visible;
+
+	&:before, &:after {
+    	content: '';
+    	display: block;
+    	position: absolute;
+        top: 0px;
+     	width: 100%;
+     	z-index: 1;
+  	}
+ 
+  	&:before { //header highlights
+  		@include mobile { height: ($header-height*.65); }
+		@include tablet { height: ($header-height*.85); }
+		@include desktop { height: $header-height; }
+  		background: -moz-linear-gradient(top,  rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.14) 19%, rgba(15,15,15,0.12) 26%, rgba(38,38,38,0.1) 34%, rgba(25,25,25,0.05) 50%, rgba(0,0,0,0) 81%, rgba(191,189,187,0.07) 94%, rgba(173,171,169,0.1) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(19%,rgba(0,0,0,0.14)), color-stop(26%,rgba(15,15,15,0.12)), color-stop(34%,rgba(38,38,38,0.1)), color-stop(50%,rgba(25,25,25,0.05)), color-stop(81%,rgba(0,0,0,0)), color-stop(94%,rgba(191,189,187,0.07)), color-stop(100%,rgba(173,171,169,0.1))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.14) 19%,rgba(15,15,15,0.12) 26%,rgba(38,38,38,0.1) 34%,rgba(25,25,25,0.05) 50%,rgba(0,0,0,0) 81%,rgba(191,189,187,0.07) 94%,rgba(173,171,169,0.1) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.14) 19%,rgba(15,15,15,0.12) 26%,rgba(38,38,38,0.1) 34%,rgba(25,25,25,0.05) 50%,rgba(0,0,0,0) 81%,rgba(191,189,187,0.07) 94%,rgba(173,171,169,0.1) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.14) 19%,rgba(15,15,15,0.12) 26%,rgba(38,38,38,0.1) 34%,rgba(25,25,25,0.05) 50%,rgba(0,0,0,0) 81%,rgba(191,189,187,0.07) 94%,rgba(173,171,169,0.1) 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.14) 19%,rgba(15,15,15,0.12) 26%,rgba(38,38,38,0.1) 34%,rgba(25,25,25,0.05) 50%,rgba(0,0,0,0) 81%,rgba(191,189,187,0.07) 94%,rgba(173,171,169,0.1) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33000000', endColorstr='#1aadaba9',GradientType=0 ); /* IE6-9 */
+		// needs latest Compass, add '@import "compass"' to your scss
+		//@include filter-gradient(#33000000, #1aadaba9, vertical); // IE6-9
+		//@include background-image(linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.14) 19%,rgba(15,15,15,0.12) 26%,rgba(38,38,38,0.1) 34%,rgba(25,25,25,0.05) 50%,rgba(0,0,0,0) 81%,rgba(191,189,187,0.07) 94%,rgba(173,171,169,0.1) 100%));
+  	}
+
+  	&:after { //header shading
+  		top: $header-height;
+  		height: ($header-height*1.5);
+  		@include mobile { height: (($header-height*.65)*1.5); top: ($header-height*.65);}
+		@include tablet { height: (($header-height*.85)*1.5); top: ($header-height*.85);}
+		@include desktop { height: ($header-height*1.5); top: $header-height; }
+		background: -moz-linear-gradient(top,  rgba(0,0,0,0.2) 0%, rgba(27,27,27,0.12) 50%, rgba(19,19,19,0.1) 65%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(50%,rgba(27,27,27,0.12)), color-stop(65%,rgba(19,19,19,0.1)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(27,27,27,0.12) 50%,rgba(19,19,19,0.1) 65%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(27,27,27,0.12) 50%,rgba(19,19,19,0.1) 65%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(27,27,27,0.12) 50%,rgba(19,19,19,0.1) 65%,rgba(0,0,0,0) 100%); /* IE10+ */
+		background: linear-gradient(to bottom,  rgba(0,0,0,0.2) 0%,rgba(27,27,27,0.12) 50%,rgba(19,19,19,0.1) 65%,rgba(0,0,0,0) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+	}
+}
+
+body.admin-bar .header:before { top:28px; }
+body.admin-bar .header:after  { top: ($header-height + 28px); }
+
+//  BRANDING
+//----------------------------------------------------------------------
+
+.logo {
+	display: block;
+	position: relative;
+	z-index: 2;
+	float: left;
+	@include mobile { height: ($logo-height*.65); width: ($logo-width*.65); }
+	@include tablet { height: ($logo-height*.85); width: ($logo-width*.85); }
+	@include desktop { height: $logo-height; width:  $logo-width; }
+	top:  4px;
+	left: 0.5em;
+	background-image: url('../../assets/svg/wilson-logo.svg');
+	background-size: cover;
+	background-repeat:no-repeat;
+	
+}

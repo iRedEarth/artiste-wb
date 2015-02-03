@@ -1,0 +1,191 @@
+/*****************************************************************
+Site Name: artist-wb
+Author: Adam CW Houston
+
+TABLES
+******************************************************************/
+
+// -- Reset
+// table, caption, tbody, tfoot, thead, tr, th, td {
+//   margin: 0;
+//   padding: 0;
+//   border: 0;
+//   font-size: 100%;
+//   font: inherit;
+//   vertical-align: baseline;
+// }
+// table {
+//   border-collapse: collapse;
+//   border-spacing: 0;
+// }
+
+//Stylesheet: Variables
+$table-backgrounds: (
+  table:	rgb(255,252,229),
+  image:	"url('../../assets/img/graphcoders-lil-fiber.png')",
+  head:		@include css-gradient($from: rgba(0,0,0,0.34), $to: rgba(122, 117, 113, 0.65)),
+  foot:		#666777,
+  odd:		rgba(199, 234, 237, 0.45),
+  even:		fade_out($text-blue, 0.55),
+  column:	#fff
+);
+
+$table-borders: (
+  table:	"3px solid rgba(240, 240, 240, 0.24)",
+  head:		#334,
+  foot:		#666777,
+  odd:		#666777,
+  even:		#666777,
+  column:	#fff
+);
+
+$table-font: (
+  table:	$body-text,
+  head:		$font-small,
+  foot:		$body-text,
+  caption:	$font-small
+);
+
+$table-font-color: (
+  table:	#777,
+  head:		#777,
+  foot:		#777,
+  caption:	#777,
+  link:		#777
+);
+
+%table-shadow { // raised table OR inset table
+	box-shadow:
+		2px 10px 6px -6px rgba(0,0,0,0.45),
+		1px 5px 9px 2px rgba(0,0,0,0.30); 
+}
+
+// to use 'map' array
+//
+// table {
+//   background-color: map-get($table-backgrounds, table);
+// }
+
+
+// **************************
+// OLD VARIABLE SYNTAX
+%table-background {
+	background-color: rgb(255,252,229);
+	background-image: url('../../assets/img/graphcoders-lil-fiber.png');
+}
+%thead-background { 
+	@include css-gradient($from: rgba(0,0,0,0.34), $to: rgba(122, 117, 113, 0.65));
+}
+
+$tfoot-background: #fff;
+$tbody-background: #fff;
+$trow-background: #fff;
+$todd-background: #fff;
+$teven-background: #fff;
+$tcolumn-background: #fff;
+
+$table-border: 3px solid rgba(240, 240, 240, 0.24);
+$thead-border: #fff;
+$trow-border: #fff;
+$todd-border #fff;
+$teven-border: #fff;
+$tcolumn-border: #fff;
+
+$tborder-radius: 2px;
+
+$table-font: $body-text;
+$thead-font: $font-small;
+$tfoot-font: $body-text;
+$tcaption-font: $font-small;
+
+$table-font-color: $body-text;
+$thead-font-color: $font-small;
+$tfoot-font-color: $body-text;
+$tcaption-font-color: $font-small;
+$tlink-font-color: $font-small;
+
+
+
+
+table {
+	width: 100%;
+	border-radius: 2px;
+	border: 3px solid rgba(240, 240, 240, 0.24);
+	//background-color: fade_out($white, 0.65);
+	//background-color: fade_out($white, 0.15);
+	background-color: rgb(255,252,229);
+	background-image: url('../../assets/img/graphcoders-lil-fiber.png');
+	font-family: $font-small;
+	font-size: 85%;
+	color: #787878;
+	//border: 1px solid $gray;
+	margin-bottom: 1.5em;
+	border-collapse: separate;
+	box-shadow:
+		2px 10px 6px -6px rgba(0,0,0,0.45),
+		1px 5px 9px 2px rgba(0,0,0,0.30); 
+
+	caption {
+		margin: 0 0 7px;
+		font-size: 0.75em;
+		color: $meta-gray;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+}
+
+thead th {
+	font-family: $font-small;
+	text-transform: uppercase;
+	padding: 0.4em;
+	//background-color: #787878;
+	@include css-gradient($from: rgba(0,0,0,0.34), $to: rgba(122, 117, 113, 0.65));
+	border-bottom: 1px solid fade_out($body-color, 0.65);
+	//font-size: 85%;
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	//color: fade_out($header-text-color, 0.35);
+	//color: fade_out($text-blue, 0.25);
+	color: $text-pale;
+	text-decoration: none;
+	text-shadow: // letterpress
+		-1px -1px 0px rgba(0, 0, 0, 0.28),
+		1px 1px 1px rgba(122, 117, 113, 0.85);
+}
+
+tr {
+	//border-bottom: 1px solid $gray;
+	font-family: $font-body;
+	box-shadow: // grooved line
+		0 -1px 1px -1px rgba(0, 0, 0, 0.25),
+		inset 0 1px 2px -1px rgba(255, 255, 255, 0.30);
+
+	&:nth-child(even) {
+		//background-color: rgba(187, 200, 197, 0.55);
+		background-color: fade_out($text-blue, 0.55);
+		//box-shadow: // grooved line
+			//0 -1px 1px -1px rgba(0, 0, 0, 0.18),
+			//inset 0 1px 2px -1px rgba(255, 255, 255, 0.30);
+	}
+}
+
+td {
+	padding: 7px;
+	//border-right: 1px solid $gray;
+
+	&:last-child {
+		border-right: 0;
+	}
+}
+
+tbody {
+	border: 3px solid #fff; //rgba(245, 245, 245, 0.95);
+	//background-color: $light-gray;
+	//border-bottom: 1px solid $gray;
+	//border-right: 1px solid $gray;
+}
+th {
+	&:last-child {
+		border-right: 0;
+	}
+}

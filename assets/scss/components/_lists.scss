@@ -1,0 +1,125 @@
+/*
+----------------------------------------------------------------------
+Site Name: artist-wb
+Author: Adam CW Houston
+
+	LISTS
+	 - List Variables
+	 - Ordered Lists
+	 - Unordered Lists
+
+----------------------------------------------------------------------
+*/
+
+//List Variables
+$list-decoration (
+	unordered:		"\25C6",
+	ulnest-one:		"\25C6",
+	ulnest-two:		"\25C6",
+	ulnest-three:	"\25C6",
+	ordered:		"decimal",
+	olnest-one:		"upper-alpha",
+	olnest-two:		"decimal",
+	olnest-three:	"decimal",
+	color: 			fade_out($header-text-color, 0.35)
+);
+
+%uldecoration {
+	top:-0.1em;
+	left:-0.65em;
+	font-size: 0.8em;
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	color: fade_out($header-text-color, 0.35);
+	text-shadow: // letterpress
+		-1px -1px 0px rgba(0, 0, 0, 0.28),
+		1px 1px 1px rgba(122, 117, 113, 0.65);
+}
+%oldecoration {
+	top:-0.1em;
+	left:-1.25em;
+	font-family: $font-small;
+	font-size: 95%;
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	text-shadow: // letterpress
+		-1px -1px 0px rgba(0, 0, 0, 0.28),
+		1px 1px 1px rgba(122, 117, 113, 0.65);
+}
+
+$list-nest-inset: 0.75em;
+
+
+//  LISTS
+//----------------------------------------------------------------------
+
+ul, ol, dl {
+	position:relative; 
+	list-style:none;
+	text-decoration: none; 
+}
+
+ul, ol { padding-left:0.55em; }
+
+
+//  ORDERED LISTS
+//----------------------------------------------------------------------
+
+ol {	counter-reset: li;
+
+	& li {    
+		position:relative; 
+		display:block;
+		list-style:none; 
+		margin-left:0.75em;
+		&:before {	
+			content: counters(li, "."); // Use the counter as content 
+			counter-increment: li; // Increment the counter by 1 */
+		    // Position and style the number
+			margin-right: 0.75em;
+			font-family: $font-small;
+			font-size: 95%;
+			font-weight: 700;
+			letter-spacing: 0.06em;
+			color: fade_out($header-text-color, 0.35);
+			text-decoration: none;
+			text-shadow: // letterpress
+				-1px -1px 0px rgba(0, 0, 0, 0.28),
+				1px 1px 1px rgba(122, 117, 113, 0.65);
+		}
+
+		& > ol li li:before {
+			content: counter(li, upper-alpha);
+			font-size: 85%;
+		}
+	} // end li
+
+} // end ol
+
+
+//  UNORDERED LISTS
+//----------------------------------------------------------------------
+
+ul { 	position:relative; 
+		list-style:none; 
+
+	li {	margin-left:0.45em;
+			padding-left:0.35em;
+
+			&:before {
+				content: "\25C6"; 
+				margin-right: 0.55em;
+				font-size: 0.8em;
+				font-weight: 700;
+				letter-spacing: 0.03em;
+				color: fade_out($header-text-color, 0.35);
+				text-decoration: none;
+				text-shadow: // letterpress
+					-1px -1px 0px rgba(0, 0, 0, 0.28),
+					1px 1px 1px rgba(122, 117, 113, 0.65);
+			}
+
+			ul { }
+	} // end li
+
+} // end ul

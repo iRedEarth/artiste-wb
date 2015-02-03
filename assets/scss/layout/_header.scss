@@ -1,0 +1,92 @@
+
+/*
+----------------------------------------------------------------------
+Site Name: artist-wb
+Author: Adam CW Houston
+Version: 0.7
+
+	Header
+	 - Header Variables
+	 - Site Header
+	 - Site Branding
+
+----------------------------------------------------------------------
+*/
+
+// HEADER VARIABLES
+
+//$mobile-width: 360px;
+$mobile-width:415px;
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+$header-height: 100px;
+$logo-height: ($header-height*1.04);
+$logo-width: ($logo-height*4);
+
+@mixin mobile {
+  @media (max-width: #{$mobile-width}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+
+//  SITE HEADER
+//----------------------------------------------------------------------
+.header {
+	#inner-header { 
+		position: relative;
+    	height: 100%;
+    }
+	@include mobile { height: 18vw; }
+	@include tablet { height: ($header-height*.85); }
+	@include desktop { height: $header-height; }
+	margin-top: -2px;
+	overflow: visible;
+
+	&::before, &::after {
+    	content: '';
+    	display: block;
+    	position: absolute;
+        top: 0px;
+     	width: 100%;
+     	z-index: 1;
+  	}
+}
+
+body.admin-bar .header:before { top:28px; }
+body.admin-bar .header:after  { top: ($header-height + 32px); }
+@include mobile {
+	body.admin-bar .header:before { top:28px; }
+	body.admin-bar .header:after  { top: ($header-height + 32px); }
+}
+
+//  BRANDING
+//----------------------------------------------------------------------
+
+.logo {
+	display: block;
+	position: relative;
+	z-index: 2;
+	float: left;
+	top:  4px;
+	left: 0.5em;
+	height: 104%;
+	width: 40.6%;
+	@include mobile { height: 104%; width: 75%; }
+	background-image: url('../../assets/svg/wilson-logo.svg');
+	background-size: cover;
+	background-repeat:no-repeat;
+}

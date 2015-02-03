@@ -1,0 +1,469 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Mixins Stylesheet
+
+This is where you can take advantage of Sass' great features: Mixins.
+I won't go in-depth on how they work exactly,
+there are a few articles below that will help do that. What I will
+tell you is that this will help speed up simple changes like
+changing a color or adding CSS3 techniques gradients.
+
+A WORD OF WARNING: It's very easy to overdo it here. Be careful and
+remember less is more.
+
+Helpful:
+http://sachagreif.com/useful-sass-mixins/
+http://thesassway.com/intermediate/leveraging-sass-mixins-for-cleaner-code
+http://web-design-weekly.com/blog/2013/05/12/handy-sass-mixins/
+
+******************************************************************/
+
+
+/*********************
+TRANSITION
+*********************/
+
+/*
+I totally rewrote this to be cleaner and easier to use.
+You'll need to be using Sass 3.2+ for these to work.
+Thanks to @anthonyshort for the inspiration on these.
+USAGE: @include transition(all 0.2s ease-in-out);
+*/
+
+@mixin transition($transition...) {
+  // defining prefixes so we can use them in mixins below
+  $prefixes:      ("-webkit-", "" );
+  @each $prefix in $prefixes {
+    #{$prefix}transition: $transition;
+  }
+}
+
+/*********************
+CSS3 GRADIENTS
+Be careful with these since they can
+really slow down your CSS. Don't overdo it.
+*********************/
+
+/* @include css-gradient(#dfdfdf,#f8f8f8); */
+@mixin css-gradient($from: #dfdfdf, $to: #f8f8f8) {
+	background-color: $to;
+	background-image: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+	background-image: -webkit-linear-gradient(top, $from, $to);
+	background-image: -moz-linear-gradient(top, $from, $to);
+	background-image: -o-linear-gradient(top, $from, $to);
+	background-image: linear-gradient(to bottom, $from, $to);
+}
+
+/*********************
+BOX SIZING
+*********************/
+
+/* @include box-sizing(border-box); */
+/* NOTE: value of "padding-box" is only supported in Gecko. So
+probably best not to use it. I mean, were you going to anyway? */
+@mixin box-sizing($type: border-box) {
+	-webkit-box-sizing: $type;
+	-moz-box-sizing:    $type;
+	-ms-box-sizing:     $type;
+	box-sizing:         $type;
+}
+
+/*********************
+FLEXBOX
+*********************/
+
+//----------------------------------------------------------------------
+// Flexbox Containers
+//
+// The 'flex' value causes an element to generate a block-level flex
+// container box.
+//
+// The 'inline-flex' value causes an element to generate a inline-level
+// flex container box. 
+//
+// display: flex | inline-flex
+//
+// http://w3.org/tr/css3-flexbox/#flex-containers
+//
+// (Placeholder selectors for each type, for those who rather @extend)
+@mixin flexbox {
+display: -webkit-box;
+display: -webkit-flex;
+display: -moz-flex;
+display: -ms-flexbox;
+display: flex;
+}
+%flexbox { @include flexbox; }
+//----------------------------------
+@mixin inline-flex {
+display: -webkit-inline-box;
+display: -webkit-inline-flex;
+display: -moz-inline-flex;
+display: -ms-inline-flexbox;
+display: inline-flex;
+}
+%inline-flex { @include inline-flex; }
+//----------------------------------------------------------------------
+// Flexbox Direction
+//
+// The 'flex-direction' property specifies how flex items are placed in
+// the flex container, by setting the direction of the flex container's
+// main axis. This determines the direction that flex items are laid out in. 
+//
+// Values: row | row-reverse | column | column-reverse
+// Default: row
+//
+// http://w3.org/tr/css3-flexbox/#flex-direction-property
+@mixin flex-direction($value: row) {
+@if $value == row-reverse {
+-webkit-box-direction: reverse;
+-webkit-box-orient: horizontal;
+	} @else if $value == column {
+-webkit-box-direction: normal;
+-webkit-box-orient: vertical;
+	} @else if $value == column-reverse {
+-webkit-box-direction: reverse;
+-webkit-box-orient: vertical;
+	} @else {
+-webkit-box-direction: normal;
+-webkit-box-orient: horizontal;
+	}
+-webkit-flex-direction: $value;
+-moz-flex-direction: $value;
+-ms-flex-direction: $value;
+flex-direction: $value;
+}
+	// Shorter version:
+@mixin flex-dir($args...) { @include flex-direction($args...); }
+//----------------------------------------------------------------------
+// Flexbox Wrap
+//
+// The 'flex-wrap' property controls whether the flex container is single-line
+// or multi-line, and the direction of the cross-axis, which determines
+// the direction new lines are stacked in. 
+//
+// Values: nowrap | wrap | wrap-reverse
+// Default: nowrap
+//
+// http://w3.org/tr/css3-flexbox/#flex-wrap-property
+@mixin flex-wrap($value: nowrap) {
+	// No Webkit Box fallback.
+-webkit-flex-wrap: $value;
+-moz-flex-wrap: $value;
+@if $value == nowrap {
+-ms-flex-wrap: none;
+	} @else { 
+-ms-flex-wrap: $value; 
+	}
+flex-wrap: $value;
+}
+//----------------------------------------------------------------------
+// Flexbox Flow (shorthand)
+//
+// The 'flex-flow' property is a shorthand for setting the 'flex-direction'
+// and 'flex-wrap' properties, which together define the flex container's
+// main and cross axes.
+//
+// Values: <flex-direction> | <flex-wrap> 
+// Default: row nowrap
+//
+// http://w3.org/tr/css3-flexbox/#flex-flow-property
+@mixin flex-flow($values: (row nowrap)) {
+	// No Webkit Box fallback.
+-webkit-flex-flow: $values;
+-moz-flex-flow: $values;
+-ms-flex-flow: $values;
+flex-flow: $values;
+}
+//----------------------------------------------------------------------
+// Flexbox Order
+//
+// The 'order' property controls the order in which flex items appear within
+// their flex container, by assigning them to ordinal groups.
+//
+// Default: 0
+//
+// http://w3.org/tr/css3-flexbox/#order-property
+@mixin order($int: 0) {
+-webkit-box-ordinal-group: $int + 1;
+-webkit-order: $int;
+-moz-order: $int;
+-ms-flex-order: $int;
+order: $int;
+}
+//----------------------------------------------------------------------
+// Flexbox Grow
+//
+// The 'flex-grow' property sets the flex grow factor. Negative numbers
+// are invalid.
+//
+// Default: 0
+//
+// http://w3.org/tr/css3-flexbox/#flex-grow-property
+@mixin flex-grow($int: 0) {
+-webkit-box-flex: $int;
+-webkit-flex-grow: $int;
+-moz-flex-grow: $int;
+-ms-flex-positive: $int;
+flex-grow: $int;
+}
+//----------------------------------------------------------------------
+// Flexbox Shrink
+//
+// The 'flex-shrink' property sets the flex shrink factor. Negative numbers
+// are invalid.
+//
+// Default: 1
+//
+// http://w3.org/tr/css3-flexbox/#flex-shrink-property
+@mixin flex-shrink($int: 1) {
+-webkit-flex-shrink: $int;
+-moz-flex-shrink: $int;
+-ms-flex-negative: $int;
+flex-shrink: $int;
+}
+//----------------------------------------------------------------------
+// Flexbox Basis
+//
+// The 'flex-basis' property sets the flex basis. Negative lengths are invalid. 
+//
+// Values: Like "width" 
+// Default: auto
+//
+// http://www.w3.org/TR/css3-flexbox/#flex-basis-property
+@mixin flex-basis($value: 0) {
+-webkit-flex-basis: $value;
+-moz-flex-basis: $value;
+-ms-flex-preferred-size: $value;
+flex-basis: $value;
+}
+//----------------------------------------------------------------------
+// Flexbox "Flex" (shorthand)
+//
+// The 'flex' property specifies the components of a flexible length: the
+// flex grow factor and flex shrink factor, and the flex basis. When an
+// element is a flex item, 'flex' is consulted instead of the main size
+// property to determine the main size of the element. If an element is
+// not a flex item, 'flex' has no effect.
+//
+// Values: none | <flex-grow> <flex-shrink> || <flex-basis>
+// Default: See individual properties (1 1 0).
+//
+// http://w3.org/tr/css3-flexbox/#flex-property
+@mixin flex($fg: 1, $fs: null, $fb: null) {
+	// Set a variable to be used by box-flex properties
+$fg-boxflex: $fg;
+	// Box-Flex only supports a flex-grow value so let's grab the
+	// first item in the list and just return that.
+@if type-of($fg) == 'list' {
+$fg-boxflex: nth($fg, 1);
+	}
+-webkit-box-flex: $fg-boxflex;
+-webkit-flex: $fg $fs $fb;
+-moz-box-flex: $fg-boxflex;
+-moz-flex: $fg $fs $fb;
+-ms-flex: $fg $fs $fb;
+flex: $fg $fs $fb;
+}
+//----------------------------------------------------------------------
+// Flexbox Justify Content
+//
+// The 'justify-content' property aligns flex items along the main axis
+// of the current line of the flex container. This is done after any flexible
+// lengths and any auto margins have been resolved. Typically it helps distribute
+// extra free space leftover when either all the flex items on a line are
+// inflexible, or are flexible but have reached their maximum size. It also
+// exerts some control over the alignment of items when they overflow the line.
+//
+// Note: 'space-*' values not supported in older syntaxes.
+//
+// Values: flex-start | flex-end | center | space-between | space-around
+// Default: flex-start
+//
+// http://w3.org/tr/css3-flexbox/#justify-content-property
+@mixin justify-content($value: flex-start) {
+@if $value == flex-start {
+-webkit-box-pack: start;
+-ms-flex-pack: start;
+	} @else if $value == flex-end {
+-webkit-box-pack: end;
+-ms-flex-pack: end;
+	} @else if $value == space-between {
+-webkit-box-pack: justify;
+-ms-flex-pack: justify;
+	} @else if $value == space-around {
+-ms-flex-pack: distribute;		
+	} @else {
+-webkit-box-pack: $value;
+-ms-flex-pack: $value;
+	}
+-webkit-justify-content: $value;
+-moz-justify-content: $value;
+justify-content: $value;
+}
+	// Shorter version:
+@mixin flex-just($args...) { @include justify-content($args...); }
+//----------------------------------------------------------------------
+// Flexbox Align Items
+//
+// Flex items can be aligned in the cross axis of the current line of the
+// flex container, similar to 'justify-content' but in the perpendicular
+// direction. 'align-items' sets the default alignment for all of the flex
+// container's items, including anonymous flex items. 'align-self' allows
+// this default alignment to be overridden for individual flex items. (For
+// anonymous flex items, 'align-self' always matches the value of 'align-items'
+// on their associated flex container.) 
+//
+// Values: flex-start | flex-end | center | baseline | stretch
+// Default: stretch
+//
+// http://w3.org/tr/css3-flexbox/#align-items-property
+@mixin align-items($value: stretch) {
+@if $value == flex-start {
+-webkit-box-align: start;
+-ms-flex-align: start;
+	} @else if $value == flex-end {
+-webkit-box-align: end;
+-ms-flex-align: end;
+	} @else {
+-webkit-box-align: $value;
+-ms-flex-align: $value;
+	}
+-webkit-align-items: $value;
+-moz-align-items: $value;
+align-items: $value;
+}
+//----------------------------------
+// Flexbox Align Self
+//
+// Values: auto | flex-start | flex-end | center | baseline | stretch
+// Default: auto
+@mixin align-self($value: auto) {
+	// No Webkit Box Fallback.
+-webkit-align-self: $value;
+-moz-align-self: $value;
+@if $value == flex-start {
+-ms-flex-item-align: start;
+	} @else if $value == flex-end {
+-ms-flex-item-align: end;
+	} @else {
+-ms-flex-item-align: $value;
+	}
+align-self: $value;
+}
+//----------------------------------------------------------------------
+// Flexbox Align Content
+//
+// The 'align-content' property aligns a flex container's lines within the
+// flex container when there is extra space in the cross-axis, similar to
+// how 'justify-content' aligns individual items within the main-axis. Note,
+// this property has no effect when the flexbox has only a single line.
+//
+// Values: flex-start | flex-end | center | space-between | space-around | stretch
+// Default: stretch
+//
+// http://w3.org/tr/css3-flexbox/#align-content-property
+@mixin align-content($value: stretch) {
+	// No Webkit Box Fallback.
+-webkit-align-content: $value;
+-moz-align-content: $value;
+@if $value == flex-start {
+-ms-flex-line-pack: start;
+	} @else if $value == flex-end {
+-ms-flex-line-pack: end;
+	} @else {
+-ms-flex-line-pack: $value;
+	}
+align-content: $value;
+}
+
+// CORNER RIBBONS -- Ribbon Variants
+//----------------------------------------------------------------------
+@mixin ribbon ($color, $bgcolor1, $bgcolor2, $position: top-right) {
+  > small {
+    
+    @include filter-gradient($bgcolor1, $bgcolor2, vertical);
+    @include background-image(linear-gradient(top, $bgcolor1 0%, $bgcolor2 100%));
+    
+    position: absolute;
+    display: block;
+    width: 105%;
+    padding: 9px 17px;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 2px 0 darken($bgcolor1, 15%);
+    font-weight: bold;
+    font-size: 65%;
+    color: $color;
+    background-color: $bgcolor1;
+    
+    &:before,
+    &:after {
+      position: absolute;
+      content: " ";
+    }
+
+    &:before { left: 0; }
+    &:after  { right: 0; }
+    
+    @if ($position == top-right) {
+      @include transform(rotate(40deg));
+      @include box-shadow(0 4px 8px -3px rgba(#000, .55));
+      top: 10px;
+      left: 24px;
+      
+      &:before, &:after { 
+        bottom: -3px; 
+        border-top: 3px solid darken($bgcolor1, 40%);
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+      }
+    } 
+    
+    @elseif ($position == top-left) {
+      @include transform(rotate(-45deg));
+      @include box-shadow(0 3px 6px -3px rgba(#000, .5));
+      top: 16px;
+      left: -27px;  
+      
+      &:before, &:after { 
+        bottom: -3px; 
+        border-top: 3px solid darken($bgcolor1, 40%);
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+      }
+    }
+    
+    @elseif ($position == bottom-right) {
+      @include transform(rotate(-50deg));
+      @include box-shadow(0 -3px 6px -3px rgba(#000, .5));
+      bottom: 21px;
+      right: -31px;
+      
+      &:before, &:after { 
+        top: -3px; 
+        border-bottom: 3px solid darken($bgcolor1, 40%);
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+      }
+    }
+    
+    @elseif ($position == bottom-left) {
+      @include transform(rotate(50deg));
+      @include box-shadow(0 -3px 6px -3px rgba(#000, .5));
+      bottom: 21px;
+      left: -31px;
+      
+      &:before, &:after { 
+        top: -3px; 
+        border-bottom: 3px solid darken($bgcolor1, 40%);
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+      }
+    }
+  }
+
+
+}

@@ -1,0 +1,18 @@
+body {
+	background-color: $body-color;
+  	background-image: url('../../assets/img/wb-wood-pattern-512.jpg');
+	background-size: 512px 512px;
+}
+
+// TEXT SELECTION  
+::-moz-selection { background:rgba(200, 243, 247, 0.85); color:$color-iron; text-shadow: none; }
+::selection { background:rgba(200, 243, 247, 0.85); color:$color-iron; text-shadow: none; }
+
+/*********************
+LAYOUT & GRID STYLES
+*********************/
+
+.wrap {
+	width: 96%;
+	margin: 0 auto;
+}
